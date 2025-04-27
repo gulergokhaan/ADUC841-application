@@ -13,7 +13,7 @@ Bu çalışmalar, **Sakarya Üniversitesi Elektrik-Elektronik Mühendisliği Bö
 - DAC (Digital to Analog Converter) uygulamaları
 - Timer/Counter işlemleri
 - Seri haberleşme (UART) örnekleri
-- PID kontrol uygulamaları
+- PID kontrol uygulamaları (PID kontrol uygulamalarında kullanılan Kp, Ki, Kd değerleri, örnek bir referans sistem üzerinden alınarak uygulamaya adapte edilmiştir.)
 
 ## Gereksinimler
 
@@ -21,13 +21,6 @@ Bu çalışmalar, **Sakarya Üniversitesi Elektrik-Elektronik Mühendisliği Bö
 - **Geliştirme Kartı:** Sakarya Üniversitesi ADuC841 Geliştirme Kartı  
   [Tanıtım Dokümanı (PDF)](https://barakli.sakarya.edu.tr/sites/barakli.sakarya.edu.tr/file/gelistirme_karti_tanitim_son3.pdf)
 - **Geliştirme Ortamı:** [Keil µVision](https://www.keil.com/demo/eval/c51.htm) (veya ADuC841 destekleyen bir C derleyicisi)
-- **Programlayıcı:** ADuC serisi uyumlu programlayıcı (örneğin, USB-I2C adaptör)
-- **Bağlantı:** UART, GPIO, ADC, DAC pinleri üzerinden çeşitli sensör ve aktüatörlerle bağlantı yapılabilir.
-
-## Katkıda Bulunmak
-
-Geliştirme sürecine katkıda bulunmak isterseniz, pull request gönderebilir veya issue açabilirsiniz.  
-Her türlü öneri ve katkı değerlendirilecektir!
 
 ## İletişim
 
