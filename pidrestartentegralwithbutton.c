@@ -11,9 +11,9 @@ float Kp = 0.0462;
 float Ki = 0.0817;
 float Kd = -3.6619;
 
-// PID integral ve türev hesaplari için yardimci degiskenler
+// PID integral ve tÃ¼rev hesaplari iÃ§in yardimci degiskenler
 float turev = 0.0, integral = 0.0, A = 0.0;
-bit buton_onceki_durum = 1; // Butonun önceki durumunu saklar
+bit buton_onceki_durum = 1; // Butonun Ã¶nceki durumunu saklar
 
 // Fonksiyon Prototipleri
 void ADC_ayar(void);
@@ -30,7 +30,7 @@ void main()
 
     while (1) 
     {
-        // Timer kesmesi islemleri gerçeklestirecektir.
+        // Timer kesmesi islemleri gerÃ§eklestirecektir.
     }
 }
 
@@ -47,7 +47,7 @@ void DAC_ayar(void)
     DACCON = 0x6D;  
 }
 
-// Timer0 baslatma (1ms kesme süresi)
+// Timer0 baslatma (1ms kesme sÃ¼resi)
 void Timer0_ayar(void) 
 {
     TMOD |= 0x01; 
@@ -62,14 +62,14 @@ void Timer0_ayar(void)
 // ADC'den belirlenen kanaldan okuma yap
 unsigned int Read_ADC(unsigned char channel) 
 {
-    ADCCON2 = (ADCCON2 & 0xF0) | (channel & 0x0F);  // Üst 4 bit sabit, alt 4 bit kanal seçimi
+    ADCCON2 = (ADCCON2 & 0xF0) | (channel & 0x0F);  // Ãœst 4 bit sabit, alt 4 bit kanal seÃ§imi
     SCONV = 1; 
     while (SCONV == 1); 
 
     return ((unsigned int)(ADCDATAH & 0X0F) << 8) | (unsigned int)ADCDATAL; 
 }
 
-// DAC0 çikisina veri yazma
+// DAC0 Ã§ikisina veri yazma
 void Write_DAC(unsigned int deger) 
 {
     deger &= 0x0FFF;  
@@ -84,7 +84,7 @@ void Timer0_ISR(void) interrupt 1
     TL0 = 0xCD;
     sayac++;
 
-    if (sayac == 12) // 10ms örnekleme zamani
+    if (sayac == 12) // 10ms Ã¶rnekleme zamani
     {
         sayac = 0;
 
@@ -101,9 +101,9 @@ void Timer0_ISR(void) interrupt 1
         else
         {ref = Read_ADC(7);}
 
-        buton_onceki_durum = BUTON2; // Önceki buton durumunu sakla
+        buton_onceki_durum = BUTON2; // Ã–nceki buton durumunu sakla
 
-        cikis = Read_ADC(2); // Çikis degerini oku
+        cikis = Read_ADC(2); // Ã‡ikis degerini oku
 
         // PID hesaplama
         hata = ref - cikis; 
@@ -116,11 +116,11 @@ void Timer0_ISR(void) interrupt 1
         ui = (float)(Ki * integral);
         A = integral;
 
-        // Türev
+        // TÃ¼rev
         ud = (float)(Kd * (hata - turev));
         turev = hata;
 
-        // PID Çikisi
+        // PID Ã‡ikisi
         Upid = (float)(up + ui + ud);
         
         if (Upid > 4095) Upid = 4095;
