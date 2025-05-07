@@ -24,7 +24,7 @@ void Write_DAC0(unsigned int value);
 // Main fonksiyonu  
 void main(void) {
 //		Kb = sqrt(abs(Ki/Kd));
-//    P2 &= ~(1 << 3);  // Port 2.3'ü temizle  
+//    P2 &= ~(1 << 3);  // Port 2.3'Ã¼ temizle  
 //    P0 = 0x00;        // Port sifirlama  
     DAC_Init();       // DAC ayarlarini baslat  
     ADC_Init();       // ADC'yi baslat  
@@ -40,14 +40,14 @@ void DAC_Init(void) {
 // ADC ayarlarini yapilandirma  
 void ADC_Init(void) {  
     ADCCON1 = 0xFC; // ADC mod ayarlari  
-    ADCCON2 = 0x00; // ADC0 seçimi  
+    ADCCON2 = 0x00; // ADC0 seÃ§imi  
 }
 
-// Timer ayar fonksiyonu (0.1ms için timer)  
+// Timer ayar fonksiyonu (0.1ms iÃ§in timer)  
 void Timer_Init(void) {  
     TMOD |= 0x01;  // Timer 0, mod 1 (16-bit)  
-    TH0 = 0xD4;    // Timer baslangiç degeri  
-    TL0 = 0xCD;    // Timer baslangiç degeri  
+    TH0 = 0xD4;    // Timer baslangiÃ§ degeri  
+    TL0 = 0xCD;    // Timer baslangiÃ§ degeri  
     TR0 = 1;       // Timer 0'i baslat  
     ET0 = 1;       // Timer 0 kesmesini etkinlestir  
     EA = 1;        // Genel kesmeleri etkinlestir  
@@ -55,7 +55,7 @@ void Timer_Init(void) {
 
 // ADC0'dan deger okuma  
 unsigned int Read_ADC(unsigned char channel) {
-    ADCCON2 = (ADCCON2 & 0xF0) | (channel & 0x0F); // Kanal seçimi  
+    ADCCON2 = (ADCCON2 & 0xF0) | (channel & 0x0F); // Kanal seÃ§imi  
     SCONV = 1; 
     while (SCONV == 1) {};          
     return ((unsigned int)(ADCDATAH & 0X0F) << 8) | (unsigned int)ADCDATAL; 
@@ -66,7 +66,7 @@ void Write_DAC0(unsigned int value) {
 //    if (value > 4095) value = 4095;
 //    if (value < 0) value = 0;
 		value &=0xFFF;
-    DAC0H = (value >> 8)&0x0F;  // Üst 8bit  
+    DAC0H = (value >> 8)&0x0F;  // Ãœst 8bit  
     DAC0L = value & 0xFF;       // Alt 8bit DAC0'a yazilir  
 }
 
@@ -74,10 +74,10 @@ void Write_DAC0(unsigned int value) {
 void Timer_ISR(void) interrupt 1 {  
            // Timer tasma bayragini temizle  
     counter++;
-    TH0 = 0xD4;       // Timer baslangiç degeri  
-    TL0 = 0xCD;       // Timer baslangiç degeri  
+    TH0 = 0xD4;       // Timer baslangiÃ§ degeri  
+    TL0 = 0xCD;       // Timer baslangiÃ§ degeri  
 
-    if (counter == 12) {  // Örnekleme zamani: 10ms 
+    if (counter == 12) {  // Ã–rnekleme zamani: 10ms 
         counter = 0;  
 										
 					
@@ -92,29 +92,31 @@ void Timer_ISR(void) interrupt 1 {
     integral = oncekiintegraldegeri + hata;  // Integral degerini biriktir  
 		// Integral terimi 
     ui = (float)(Ki * integral);    
-    oncekiintegraldegeri = integral;	  // Integral birikimini güncelle  
-		// Türev terimi 			
+    oncekiintegraldegeri = integral;	  // Integral birikimini gÃ¼ncelle  
+		// TÃ¼rev terimi 			
     ud = (float)(Kd * (hata - turev));  
     turev = hata;
 
-    // PID çikisi  
+    // PID Ã§ikisi  
     kontrol_sinyali = (float)(up + ui + ud);
 		
    		// Anti-Windup mekanizmasi - Geri Hesaplama (Back Calculation)
     if (kontrol_sinyali > 4095) {
-        integral = integral - (Kb*(kontrol_sinyali - 4095)) ;  // Üst saturasyon düzeltmesi
+        integral = integral - (Kb*(kontrol_sinyali - 4095)) ;  // Ãœst saturasyon dÃ¼zeltmesi
+	kontrol_sinyali=4095;
     } 
     else if (kontrol_sinyali < 0) {
-        integral = integral - (Kb*(kontrol_sinyali)) ;    // Alt saturasyon düzeltmesi
+        integral = integral - (Kb*(kontrol_sinyali)) ;    // Alt saturasyon dÃ¼zeltmesi
+	kontrol_sinyali=0;
 			
 		}
 
-    // Çikis sinirlandirma  
+    // Ã‡ikis sinirlandirma  
 		
 //   if (kontrol_sinyali > 4095) {kontrol_sinyali = 4095;}
 //   if (kontrol_sinyali < 0) {kontrol_sinyali = 0;}
 
-    // PID çikisini DAC’a yaz  
+    // PID Ã§ikisini DACâ€™a yaz  
     Write_DAC0(kontrol_sinyali);
 
 		}
