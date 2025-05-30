@@ -28,3 +28,35 @@ Her türlü soru ve öneri için benimle iletişime geçebilirsiniz:
 
 - 📧 **E-posta:** [guler.gokhaan@gmail.com](mailto:guler.gokhaan@gmail.com)
 - 🔗 **GitHub:** [gulergokhaan](https://github.com/gulergokhaan)
+---------------------------------------------------------------------------
+# ADuC841 Applications
+
+This repository contains various example projects developed for the **Analog Devices ADuC841** microcontroller.  
+The projects demonstrate fundamental microcontroller usage and interaction with peripheral units (such as GPIO, ADC, DAC, etc.).
+
+These applications were implemented using a custom **ADuC841 Development Board** designed by the **Department of Electrical and Electronics Engineering at Sakarya University**.
+
+## Contents
+
+- Basic GPIO usage  
+- ADC (Analog to Digital Converter) applications  
+- DAC (Digital to Analog Converter) applications  
+- Timer/Counter operations  
+- Serial communication (UART) examples  
+- PID control applications  
+  (The Kp, Ki, and Kd values used in the PID control were adapted from a sample reference system.)
+
+## Requirements
+
+- **Microcontroller:** ADuC841  
+- **Development Board:** Sakarya University ADuC841 Development Board  
+  [Introduction Document (PDF)](https://barakli.sakarya.edu.tr/sites/barakli.sakarya.edu.tr/file/gelistirme_karti_tanitim_son3.pdf)
+- **Development Environment:** [Keil µVision](https://www.keil.com/demo/eval/c51.htm)  
+  (or any C compiler that supports ADuC841)
+
+## Contact
+
+Feel free to reach out for any questions or suggestions:
+
+- 📧 **Email:** [guler.gokhaan@gmail.com](mailto:guler.gokhaan@gmail.com)  
+- 🔗 **GitHub:** [gulergokhaan](https://github.com/gulergokhaan)
