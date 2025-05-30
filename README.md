@@ -9,8 +9,8 @@ Bu çalışmalar, **Sakarya Üniversitesi Elektrik-Elektronik Mühendisliği Bö
 ## İçerik
 
 - Temel GPIO kullanımı
-- ADC (Analog to Digital Converter) uygulamaları
-- DAC (Digital to Analog Converter) uygulamaları
+- ADC (Analog Digital Converter) uygulamaları
+- DAC (Digital Analog Converter) uygulamaları
 - Timer/Counter işlemleri
 - Seri haberleşme (UART) örnekleri
 - PID kontrol uygulamaları (PID kontrol uygulamalarında kullanılan Kp, Ki, Kd değerleri, örnek bir referans sistem üzerinden alınarak uygulamaya adapte edilmiştir.)
